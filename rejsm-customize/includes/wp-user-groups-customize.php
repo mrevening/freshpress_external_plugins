@@ -41,6 +41,17 @@ function wp_register_default_user_wywiad_taxonomy() {
                 'plural'   => __( 'Wywiad', 'wp-user-groups' )
         ) );
 }
+add_action ('init','wp_register_default_user_szpital_taxonomy');
+function wp_register_default_user_szpital_taxonomy() {
+        new Rejsm_User_Taxonomy( 'szpital',  'szpital',  array(
+                'singular' => __( 'szpital',  'wp-user-groups' ),
+                'plural'   => __( 'szpital', 'wp-user-groups' )
+        ) );
+}
+
+
+
+
 
 
 
@@ -100,7 +111,7 @@ class Rejsm_User_Taxonomy extends WP_User_Taxonomy {
                                     <tr>
                                             <td id="cb" class="manage-column column-cb check-column">
                                                     <label class="screen-reader-text" for="cb-select-all-1"><?php esc_html_e( 'Select All', 'wp-user-groups' ); ?></label>
-                                                    <input id="cb-select-all-1" type="checkbox">
+                                                    <!--<input id="cb-select-all-1" type="checkbox">-->
                                             </td>
                                             <th scope="col" class="manage-column column-name column-primary"><?php esc_html_e( 'Name', 'wp-user-groups' ); ?></th>
                                             <th scope="col" class="manage-column column-description"><?php esc_html_e( 'Description', 'wp-user-groups' ); ?></th>
@@ -110,17 +121,22 @@ class Rejsm_User_Taxonomy extends WP_User_Taxonomy {
                             <tbody>
 
                                     <?php if ( ! empty( $terms ) ) :
-
+                                            $term_description_previous = $terms[0]->description;
                                             foreach ( $terms as $term ) :
-                                                $term_childs = get_term_children( $term->term_id, $tax->name );
-
-                                                if ( empty ( $term_childs )) {
-
+//                                                $term_childs = get_term_children( $term->term_id, $tax->name );
+//                                                $desc = term_description( $term->term_id, $tax->name );
+                                                if ( empty ( $term->description ) || $term->description !== $term_description_previous ) {
+                                                    $term_description_previous = $term->description;
+                                                    ?>
+                                                    <tr class="inactive"><td> </td><th </th><th </th><th </th></tr>
+                                                        <?php
+                                                }
+                                                
                                                     $active = is_object_in_term( $user->ID, $this->taxonomy, $term->slug ); ?>
 
                                                     <tr class="<?php echo ( true === $active ) ? 'active' : 'inactive'; ?>">
                                                             <th scope="row" class="check-column">
-                                                                    <input type="radio" name="<?php echo esc_attr( $this->taxonomy ); ?>[]" id="<?php echo esc_attr( $this->taxonomy ); ?>-<?php echo esc_attr( $term->slug ); ?>" value="<?php echo esc_attr( $term->slug ); ?>" <?php checked( $active ); ?> />
+                                                                    <input type="radio" name="<?php echo esc_attr( $term->description ); ?>" id="<?php echo esc_attr( $this->taxonomy ); ?>-<?php echo esc_attr( $term->slug ); ?>" value="<?php echo esc_attr( $term->slug ); ?>" <?php checked( $active ); ?> />
                                                                     <label for="<?php echo esc_attr( $this->taxonomy ); ?>-<?php echo esc_attr( $term->slug ); ?>"></label>
                                                             </th>
                                                             <td class="column-primary">
@@ -135,12 +151,8 @@ class Rejsm_User_Taxonomy extends WP_User_Taxonomy {
 
                                                 <?php
 
-                                                }
-                                                else { ?>
-                                                    <tr class="inactive">asfdj
-                                                    </tr>
-                                                        <?php
-                                                }
+//                                                }
+                                                
                                             endforeach;
 
                                     // If there are no user groups
@@ -158,17 +170,11 @@ class Rejsm_User_Taxonomy extends WP_User_Taxonomy {
 
                             </tbody>
                             <tfoot>
-                                <tr>
-                                            <td 
-                                            </td>
-                                            <th </th>
-                                            <th </th>
-                                            <th </th>
-                                    </tr>
+
                                     <tr>
                                             <td class="manage-column column-cb check-column">
                                                     <label class="screen-reader-text" for="cb-select-all-2"><?php esc_html_e( 'Select All', 'wp-user-groups' ); ?></label>
-                                                    <input id="cb-select-all-2" type="checkbox">
+                                                    <!--<input id="cb-select-all-2" type="checkbox">-->
                                             </td>
                                             <th scope="col" class="manage-column column-name column-primary"><?php esc_html_e( 'Name', 'wp-user-groups' ); ?></th>
                                             <th scope="col" class="manage-column column-description"><?php esc_html_e( 'Description', 'wp-user-groups' ); ?></th>
@@ -190,7 +196,77 @@ class Rejsm_User_Taxonomy extends WP_User_Taxonomy {
 //        remove_action( 'admin_init',  array( $p, 'bulk_edit_action' ) );
 //        remove_filter( 'views_users', array( $p, 'bulk_edit'        ) );
 //    }
-}
+
 ////$c = new Rejsm_User_Taxonomy();
 //$q = new Rejsm_User_Taxonomy();
+
+
+
+    public function save_terms_for_user( $user_id = 0 ) {
+
+                    // Additional checks if User Profiles is active
+                    if ( function_exists( 'wp_user_profiles_get_section_hooknames' ) ) {
+
+                            // Bail if no page
+                            if ( empty( $_GET['page'] ) ) {
+                                    return;
+                            }
+
+                            // Bail if not saving this section
+                            if ( sanitize_key( $_GET['page'] ) !== 'groups' ) {
+                                    return;
+                            }
+                    }
+
+                    // Set terms for user
+                    $terms_array = array();
+                    $taxonomy = get_taxonomy($this->taxonomy);
+                    foreach (get_terms($taxonomy) as $term ) {
+                        var_dump($term);
+                        $term_description_previous = $terms[0]->description;
+                        foreach ($this->terms as $term ){
+                            if ( empty ( $term->description ) || $term->description !== $term_description_previous ) {
+                                $term_description_previous = $term->description;
+                            } else {
+                                $terms_array = array_merge($terms_array, $term->slug);
+                            }
+                    }
+                    wp_set_terms_for_user( $user_id, $this->taxonomy, $terms_array  );
+            }
+    }
+}
+
+
+//function wp_set_terms_for_user( $user_id, $taxonomy, $terms = array(), $bulk = false ) {
+//
+//	// Get the taxonomy
+//	$tax = get_taxonomy( $taxonomy );
+//
+//	// Make sure the current user can edit the user and assign terms before proceeding.
+//	if ( ! current_user_can( 'edit_user', $user_id ) && current_user_can( $tax->cap->assign_terms ) ) {
+//		return false;
+//	}
+//
+//	if ( empty( $terms ) && empty( $bulk ) ) {
+//		$terms = isset( $_POST[ $taxonomy ] )
+//			? $_POST[ $taxonomy ]
+//			: null;
+//	}
+//
+//	// Delete all user terms
+//	if ( is_null( $terms ) || empty( $terms ) ) {
+//		wp_delete_object_term_relationships( $user_id, $taxonomy );
+//
+//	// Set the terms
+//	} else {
+//		$_terms = array_map( 'sanitize_key', $terms );
+//
+//		// Sets the terms for the user
+//		wp_set_object_terms( $user_id, $_terms, $taxonomy, false );
+//	}
+//
+//	// Clean the cache
+//	clean_object_term_cache( $user_id, $taxonomy );
+//}
+
 ?>

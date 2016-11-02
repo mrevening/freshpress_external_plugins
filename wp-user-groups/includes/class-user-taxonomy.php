@@ -736,7 +736,7 @@ class WP_User_Taxonomy {
 
 			// Update terms for users
 			if ( $update_terms !== $terms ) {
-				wp_set_terms_for_user( $user, $this->taxonomy, $update_terms, true );
+//				wp_set_terms_for_user( $user, $this->taxonomy, $updat   e_terms, true );
 			}
 		}
 
