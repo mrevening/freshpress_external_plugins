@@ -1,0 +1,87 @@
+
+
+#Plec {
+    width: 10em;
+}
+#MiejsceZamieszkania {
+    width: 10em;
+}
+#Wojewodztwo {
+    width: 10em;
+}
+#Recznosc {
+    width: 10em;
+}
+#Porody {
+    width: 10em;
+}
+#Wyksztalcenie {
+    width: 10em;
+}
+#StanRodzinny {
+    width: 10em;
+}
+#Zatrudnienie {
+    width: 10em;
+}
+#PracaZarobek {
+    width: 10em;
+}
+#sm_w_rodzinie {
+    width: 10em;
+}
+#inicjaly {
+    width: 10em;
+}
+#data_zgonu {
+    width: 10em;
+}
+#data_pierwszych_objawow {
+    width: 10em;
+}
+#data_rozpoznania_choroby {
+    width: 10em;
+}
+#przebieg_choroby{
+    width: 10em;
+}
+#badanie_mri{
+    width: 10em;
+}
+#badanie_plynu{
+    width: 10em;
+}
+#leczenie_objawowe{
+    width: 10em;
+}
+#leczenie_immunomodulujace{
+    width: 10em;
+}
+#data_zgonu{
+    width: 10em;
+}
+
+.drop-down{
+    width: 10em;
+}
+.ankieta {
+    text-align: center;
+}
+.MyDate{
+    width: 10em;
+}
+.msis_eq5d_check {
+    text-align: right;
+}
+
+
+
+
+
+#minor-publishing-actions {
+    display: none;
+}
+#misc-publishing-actions {
+    display: none;
+}
+#ui-datepicker-div {display: none;}
