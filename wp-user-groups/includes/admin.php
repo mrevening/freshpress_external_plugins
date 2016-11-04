@@ -29,25 +29,6 @@ function wp_user_groups_admin_assets() {
  *
  * @param array $sections
  */
-//function wp_user_groups_add_profile_section( $sections = array() ) {
-//
-//	// Copy for modifying
-//	$new_sections = $sections;
-//
-//	// Add the "Activity" section
-//	$new_sections['groups'] = array(
-//		'id'    => 'groups',
-//		'slug'  => 'groups',
-//		'name'  => esc_html__( 'Groups', 'wp-user-activity' ),
-//		'cap'   => 'edit_profile',
-//		'icon'  => 'dashicons-groups',
-//		'order' => 90
-//	);
-//
-//	// Filter & return
-//	return apply_filters( 'wp_user_groups_add_profile_section', $new_sections, $sections );
-//}
-
 function wp_user_groups_add_profile_section( $sections = array() ) {
 
 	// Copy for modifying
@@ -57,20 +38,39 @@ function wp_user_groups_add_profile_section( $sections = array() ) {
 	$new_sections['groups'] = array(
 		'id'    => 'groups',
 		'slug'  => 'groups',
-		'name'  => esc_html__( 'Dane demograficzne', 'wp-user-activity' ),
+		'name'  => esc_html__( 'Groups', 'wp-user-activity' ),
 		'cap'   => 'edit_profile',
 		'icon'  => 'dashicons-groups',
 		'order' => 90
-	);
-        $new_sections['groups2'] = array(
-		'id'    => 'groups2',
-		'slug'  => 'groups2',
-		'name'  => esc_html__( 'Dane demograficzne2', 'wp-user-activity' ),
-		'cap'   => 'edit_profile',
-		'icon'  => 'dashicons-groups',
-		'order' => 91
 	);
 
 	// Filter & return
 	return apply_filters( 'wp_user_groups_add_profile_section', $new_sections, $sections );
 }
+//
+//function wp_user_groups_add_profile_section( $sections = array() ) {
+//
+//	// Copy for modifying
+//	$new_sections = $sections;
+//
+//	// Add the "Activity" section
+//	$new_sections['groups'] = array(
+//		'id'    => 'groups',
+//		'slug'  => 'groups',
+//		'name'  => esc_html__( 'Dane demograficzne', 'wp-user-activity' ),
+//		'cap'   => 'edit_profile',
+//		'icon'  => 'dashicons-groups',
+//		'order' => 90
+//	);
+//        $new_sections['groups2'] = array(
+//		'id'    => 'groups2',
+//		'slug'  => 'groups2',
+//		'name'  => esc_html__( 'Dane demograficzne2', 'wp-user-activity' ),
+//		'cap'   => 'edit_profile',
+//		'icon'  => 'dashicons-groups',
+//		'order' => 91
+//	);
+//
+//	// Filter & return
+//	return apply_filters( 'wp_user_groups_add_profile_section', $new_sections, $sections );
+//}
