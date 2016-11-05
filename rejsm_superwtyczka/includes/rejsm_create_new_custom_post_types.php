@@ -889,14 +889,59 @@ class ocena_klinimetryczna extends dane_pacjenta {
     protected $wybory = array (
     );
 }
-$dane_demograficzne = new dane_demograficzne();
-$wywiad = new wywiad();
-$diagnostyka = new diagnostyka();
-$lecznie = new leczenie();
-$aktualne_wyniki = new aktualne_wyniki();
+//class badania extends dane_pacjenta {
+//    public function __construct() {
+//        parent::__construct();
+//    }
+//    protected $post_type_name = 'badania';
+//    protected $labels = array(
+//        'name'               => 'Aktualne wyniki',
+//        'singular_name'      => 'Aktualne wyniki',
+//        'menu_name'          => 'Aktualne wyniki',
+//        'name_admin_bar'     => 'Aktualne wyniki',
+//        'add_new'            => 'Dodaj aktualne wyniki',
+//        'add_new_item'       => 'Wypełnij nowe wyniki',
+//        'new_item'           => 'Nowe wyniki',
+//        'edit_item'          => 'Edytuj wyniki',
+//        'view_item'          => 'Zobacz wyniki',
+//        'all_items'          => 'Wszystkie wyniki',
+//        'search_items'       => 'Szukaj wyniki', 
+//        'parent_item_colon'  => 'Rodzic:',
+//        'not_found'          => 'Nie znaleziono wyników.',
+//        'not_found_in_trash' => 'Nie znaleziono wyników w koszu.',
+//    );
+//    protected $description = "Wszystkie badania";
+//    protected $menu_icon = 'dashicons-chart-line';
+//    protected $lista_naglowkow = array(
+//        'Stan funkcjonalny',
+//        'Zmęczenie i depresja', 
+//    );
+//    protected $lista_pytan = array(
+//        array(
+//
+//        ),
+//        array(
+//
+//        ),
+//    );
+//    protected $wybory = array (
+//        array(
+//
+//        ),
+//        array(
+//
+//        ),
+//    );
+////}
+//$dane_demograficzne = new dane_demograficzne();
+//$wywiad = new wywiad();
+//$diagnostyka = new diagnostyka();
+//$lecznie = new leczenie();
+//$aktualne_wyniki = new aktualne_wyniki();
 $ocena_klinimetryczna = new ocena_klinimetryczna();
-$msis_29 = new msis_29();
-$eq5d = new eq5d();
+//$msis_29 = new msis_29();
+//$eq5d = new eq5d();
+//$badania = new badania();
 
 
 

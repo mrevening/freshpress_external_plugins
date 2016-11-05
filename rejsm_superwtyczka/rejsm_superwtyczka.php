@@ -25,12 +25,13 @@ require_once ABSPATH . '/wp-includes/pluggable.php' ; //błąd wordpressa, musi 
 //require_once dirname(__FILE__) . '/includes/rejsm_custom_design.php';
 //require_once dirname(__FILE__) . '/includes/rejsm_users_possibilities.php';
 //require_once dirname(__FILE__) . '/includes/rejsm_szpital_taxonomy_for_users.php';
-//require_once dirname(__FILE__) . '/includes/rejsm_create_new_custom_post_types.php';
+require_once dirname(__FILE__) . '/includes/rejsm_create_new_custom_post_types.php';
 
 
 
 require_once dirname(__FILE__) . '/includes/add_styles.php';
-require_once dirname(__FILE__) . '/includes/rejsm_display_metaboxes.php';
+require_once dirname(__FILE__) . '/includes/rejsm_display_metaboxes_1.php';
+require_once dirname(__FILE__) . '/includes/add_taxonomy.php';
 
 
 
